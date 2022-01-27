@@ -15,7 +15,7 @@ Vue.prototype.$http = {
   post: "http://localhost:5000/posts",
   users: "http://localhost:5000/users"
 }
-
+// бла бла бла бла....
 new Vue({
   el: '#app',
   vuetify: new vuetify(),
