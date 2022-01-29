@@ -15,7 +15,7 @@ const routes = [
     name: 'User',
     component: () => import('../views/UserPost.vue'),
     children: [{
-      path: '/post/postId',
+      path: 'post/:postId',
       name: "Post",
       component: () => ('../views/Post.vue')
     }]
