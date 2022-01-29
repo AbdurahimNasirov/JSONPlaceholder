@@ -15,6 +15,9 @@ Vue.prototype.$http = {
   post: "http://localhost:5000/posts",
   users: "http://localhost:5000/users"
 }
+
+// какие то изменения
+// на проверку для twixy123
 new Vue({
   el: '#app',
   vuetify: new vuetify(),
