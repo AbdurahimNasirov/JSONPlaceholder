@@ -17,7 +17,7 @@ Vue.prototype.$http = {
 }
 
 // какие то изменения
-// на проверку для twixy123
+//asdasdasdasd
 new Vue({
   el: '#app',
   vuetify: new vuetify(),
