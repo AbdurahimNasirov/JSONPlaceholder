@@ -1,47 +1,74 @@
 <template>
-  <div id="app" class="absolute none">
+  <div id="app" class="absolute">
     <v-app id="inspire">
-      <form>
-        <v-text-field
-          v-model="name"
-          :error-messages="nameErrors"
-          :counter="`∞`"
-          label="Title"
-          required
-          @input="$v.name.$touch()"
-          @blur="$v.name.$touch()"
-        ></v-text-field>
-        <v-text-field
-          v-model="title"
-          :error-messages="nameErrors"
-          :counter="`∞`"
-          label="Description"
-          required
-          @input="$v.name.$touch()"
-          @blur="$v.name.$touch()"
-        ></v-text-field>
+      <v-row justify="center" class="absolute">
+        <v-tooltip top color="cyan">
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn
+              dark
+              v-bind="attrs"
+              v-on="on"
+              fab
+              color="cyan"
+              class="mx-2 absolute-add-btn-post"
+              @click.stop="dialog = true"
+            >
+              <v-icon dark color="white">mdi-plus</v-icon>
+            </v-btn>
+          </template>
+          <span>Add new post</span>
+        </v-tooltip>
 
-        <v-select
-          v-model="select"
-          :items="items"
-          :error-messages="selectErrors"
-          label="Item"
-          required
-          @change="$v.select.$touch()"
-          @blur="$v.select.$touch()"
-        ></v-select>
-        <v-checkbox
-          v-model="checkbox"
-          :error-messages="checkboxErrors"
-          label="Do you agree?"
-          required
-          @change="$v.checkbox.$touch()"
-          @blur="$v.checkbox.$touch()"
-        ></v-checkbox>
+        <v-dialog v-model="dialog" max-width="500">
+          <v-card class="px-5 pb-1">
+            <form>
+              <v-text-field
+                v-model="name"
+                :error-messages="nameErrors"
+                :counter="`∞`"
+                label="Title"
+                required
+                @input="$v.name.$touch()"
+                @blur="$v.name.$touch()"
+              ></v-text-field>
+              <v-text-field
+                v-model="title"
+                :error-messages="nameErrors"
+                :counter="`∞`"
+                label="Description"
+                required
+                @input="$v.name.$touch()"
+                @blur="$v.name.$touch()"
+              ></v-text-field>
 
-        <v-btn class="mr-4" @click="submit"> submit </v-btn>
-        <v-btn @click="clear"> clear </v-btn>
-      </form>
+              <v-select
+                v-model="select"
+                :items="items"
+                :error-messages="selectErrors"
+                label="Item"
+                required
+                @change="$v.select.$touch()"
+                @blur="$v.select.$touch()"
+              ></v-select>
+              <v-checkbox
+                v-model="checkbox"
+                :error-messages="checkboxErrors"
+                label="Do you agree?"
+                required
+                @change="$v.checkbox.$touch()"
+                @blur="$v.checkbox.$touch()"
+              ></v-checkbox>
+            </form>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn text @click="clear"> clear </v-btn>
+              <v-btn class="mr-4 green darken-1" text @click="submit">
+                Add New Post
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+      </v-row>
     </v-app>
   </div>
 </template>
@@ -70,6 +97,7 @@ export default {
     items: [],
     checkbox: false,
     userId: null,
+    dialog: false,
   }),
 
   computed: {
@@ -106,6 +134,7 @@ export default {
         this.$v.$touch();
         return;
       } else {
+        this.dialog = false;
         this.getUsers.find((user) =>
           user.name === this.select
             ? (this.userId = user.id)
@@ -122,7 +151,7 @@ export default {
             method: "post",
             data: bodyReq,
           });
-          this.clear()
+          this.clear();
         } catch (error) {}
       }
     },
@@ -132,25 +161,19 @@ export default {
       this.title = "";
       this.select = null;
       this.checkbox = false;
+      this.dialog = false;
     },
   },
 };
 </script>
 
 <style lang="scss">
+.absolute-add-btn-post {
+  position: fixed !important;
+  top: 90%;
+  right: 3%;
+}
 .none {
   display: none !important;
-}
-.absolute {
-  position: absolute !important;
-  top: 20%;
-  width: 50vw;
-  height: 400px;
-  border: 4px solid black;
-  border-radius: 10px;
-  padding: 15px;
-  background: white;
-  left: 24.4%;
-  overflow: hidden;
 }
 </style>

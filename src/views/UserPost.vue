@@ -98,11 +98,6 @@ export default {
 </script>
 
 <style lang="scss">
-.absolute-add-btn-post {
-  position: fixed !important;
-  top: 90%;
-  right: 3%;
-}
 .search-post {
   position: fixed;
   border: 2px solid rgb(77, 74, 74);

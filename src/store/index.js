@@ -20,7 +20,6 @@ export default new Vuex.Store({
         const error = new Error('Не удалось получить пользователей')
         throw error
       }
-      // только папку service
     }
   },
   modules: {

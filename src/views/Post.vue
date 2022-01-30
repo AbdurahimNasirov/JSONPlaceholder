@@ -33,6 +33,7 @@ export default {
     examPost: ''
   }),
   async mounted() {
+    console.log('post')
     if (!this.getPosts.length)
       await this.fetchPosts({
         url: this.$http.post,

@@ -2,22 +2,6 @@
   <div>
     <Search :users="getUsers" />
     <UserItem v-for="user in getUsers" :key="user.id" :user="user" />
-    <v-tooltip left color="indigo">
-      <template v-slot:activator="{ on, attrs }">
-        <v-btn
-          dark
-          v-bind="attrs"
-          v-on="on"
-          fab
-          color="indigo"
-          class="mx-2 absolute-add-btn"
-          @click="showchanger()"
-        >
-          <v-icon dark color="white">mdi-plus</v-icon>
-        </v-btn>
-      </template>
-      <span>Add new user</span>
-    </v-tooltip>
     <AddUser :show="show" />
   </div>
 </template>
@@ -31,8 +15,6 @@ export default {
   name: "Sidebar",
   data: () => ({
     show: false,
-    items: ["foo", "bar", "fizz", "buzz"],
-    values: ["foo", "bar"],
   }),
   computed: {
     ...mapGetters(["getUsers"]),
@@ -61,9 +43,4 @@ export default {
 </script>
 
 <style lang="scss">
-.absolute-add-btn {
-  position: absolute !important;
-  bottom: 6%;
-  right: 5%;
-}
 </style>
