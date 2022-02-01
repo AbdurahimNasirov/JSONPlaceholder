@@ -1,39 +1,21 @@
 <template>
   <div>
     <h2>{{ user }}</h2>
-    <!-- не оставляй пустой id -->
     <input
       type="search"
-      name=""
-      id=""
       @input="filterPost"
       v-model="filter"
       class="search-post"
       placeholder="Search post.."
     />
     <PostItem v-for="post in post" :key="post.id" :post="post" />
-    <v-tooltip top topcolor="cyan">
-      <template v-slot:activator="{ on, attrs }">
-        <v-btn
-          dark
-          v-bind="attrs"
-          v-on="on"
-          fab
-          color="cyan"
-          class="mx-2 absolute-add-btn-post"
-        >
-          <v-icon dark color="white">mdi-plus</v-icon>
-        </v-btn>
-      </template>
-      <span>Add new post</span>
-    </v-tooltip>
     <AddPost />
   </div>
 </template>
 
 <script>
-import AddPost from "../components/auth/AddPost.vue";
-import PostItem from "../components/posts/PostsItem.vue";
+import AddPost from "@/components/auth/AddPost.vue";
+import PostItem from "@/components/posts/PostsItem.vue";
 import { mapGetters, mapActions } from "vuex";
 export default {
   computed: {
@@ -51,7 +33,6 @@ export default {
   },
   methods: {
     ...mapActions(["fetchPosts"]),
-    // так что нам нужно сделать?
     async filterPosts(id) {
       await this.fetchPosts({
         url: this.$http.post,
@@ -64,7 +45,7 @@ export default {
           this.user = user.name;
         }
       });
-      this.post = this.posts
+      this.post = this.posts;
     },
     filterPost() {
       this.post = [];
@@ -87,7 +68,7 @@ export default {
   watch: {
     "$route.params.userId": async function () {
       await this.filterPosts(+this.$route.params.userId);
-      this.filter = ''
+      this.filter = "";
     },
   },
   components: {

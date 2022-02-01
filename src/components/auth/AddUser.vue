@@ -8,10 +8,10 @@
               dark
               fab
               color="indigo"
-              class="mx-2 absolute-add-btn"
+              class="add-btn-user"
               v-bind="attrs"
               v-on="on"
-              @click.stop="dialog = true"
+              @click.stop="showDialog = true"
             >
               <v-icon dark>mdi-plus</v-icon>
             </v-btn>
@@ -19,7 +19,7 @@
           <span>Add new user</span>
         </v-tooltip>
 
-        <v-dialog v-model="dialog" max-width="500" >
+        <v-dialog v-model="showDialog" max-width="500">
           <v-card class="px-5">
             <form>
               <v-text-field
@@ -62,143 +62,6 @@
         </v-dialog>
       </v-row>
     </v-app>
-    <!-- <v-tooltip top color="indigo">
-      <template v-slot:activator="{ on, attrs }">
-        <v-btn
-          dark
-          fab
-          color="indigo"
-          class="mx-2 absolute-add-btn"
-          v-bind="attrs"
-          v-on="on"
-          @click="showModalWindow()"
-        >
-          <v-icon dark>mdi-plus</v-icon>
-        </v-btn>
-      </template>
-      <span>Add new user</span>
-    </v-tooltip> -->
-    <!-- <form>
-        <v-text-field
-          v-model="name"
-          :error-messages="nameErrors"
-          :counter="20"
-          label="Name"
-          required
-          @input="$v.name.$touch()"
-          @blur="$v.name.$touch()"
-        ></v-text-field>
-        <v-text-field
-          v-model="email"
-          :error-messages="emailErrors"
-          label="E-mail"
-          required
-          @input="$v.email.$touch()"
-          @blur="$v.email.$touch()"
-        ></v-text-field>
-        <v-checkbox
-          v-model="checkbox"
-          :error-messages="checkboxErrors"
-          label="Do you agree?"
-          required
-          @change="$v.checkbox.$touch()"
-          @blur="$v.checkbox.$touch()"
-        ></v-checkbox>
-        <v-btn text @click="submit"> Cencel </v-btn>
-        <v-btn color="primary" text @click="clear"> Add </v-btn>
-      </form> -->
-    <!-- <div class="px-4 d-block">
-      <v-menu v-model="menu" :close-on-content-click="false">
-        <template v-slot:activator="{ on, attrs }">
-          <v-tooltip left color="indigo">
-            <v-btn
-              dark
-              v-bind="attrs"
-              v-on="on"
-              fab
-              color="indigo"
-              class="mx-2 absolute-add-btn"
-            >
-            asdadasdasd
-              <v-icon dark color="white">mdi-plus</v-icon>
-            </v-btn>
-            <span>Add new user</span>
-          </v-tooltip>
-        </template>
-        <div>
-          <v-card>
-            <div>
-              <form>
-                <v-text-field
-                  v-model="name"
-                  :error-messages="nameErrors"
-                  :counter="20"
-                  label="Name"
-                  required
-                  @input="$v.name.$touch()"
-                  @blur="$v.name.$touch()"
-                ></v-text-field>
-                <v-text-field
-                  v-model="email"
-                  :error-messages="emailErrors"
-                  label="E-mail"
-                  required
-                  @input="$v.email.$touch()"
-                  @blur="$v.email.$touch()"
-                ></v-text-field>
-                <v-checkbox
-                  v-model="checkbox"
-                  :error-messages="checkboxErrors"
-                  label="Do you agree?"
-                  required
-                  @change="$v.checkbox.$touch()"
-                  @blur="$v.checkbox.$touch()"
-                ></v-checkbox>
-
-                <v-card-actions>
-                  <v-spacer></v-spacer>
-
-                  <v-btn text @click="submit"> Add </v-btn>
-                  <v-btn color="primary" text @click="clear()"> Clear </v-btn>
-                </v-card-actions>
-              </form>
-            </div>
-          </v-card>
-        </div>
-      </v-menu>
-    </div> -->
-    <!-- <v-app id="inspire"> -->
-    <!-- <form>
-        <v-text-field
-          v-model="name"
-          :error-messages="nameErrors"
-          :counter="20"
-          label="Name"
-          required
-          @input="$v.name.$touch()"
-          @blur="$v.name.$touch()"
-        ></v-text-field>
-        <v-text-field
-          v-model="email"
-          :error-messages="emailErrors"
-          label="E-mail"
-          required
-          @input="$v.email.$touch()"
-          @blur="$v.email.$touch()"
-        ></v-text-field>
-        <v-checkbox
-          v-model="checkbox"
-          :error-messages="checkboxErrors"
-          label="Do you agree?"
-          required
-          @change="$v.checkbox.$touch()"
-          @blur="$v.checkbox.$touch()"
-        ></v-checkbox>
-
-        <v-btn class="mr-4" @click="submit"> submit </v-btn>
-        <v-btn @click="clear"> clear </v-btn>
-      </form> -->
-    <!-- </v-app> -->
   </div>
 </template>
 
@@ -207,10 +70,6 @@ import { mapActions } from "vuex";
 import { validationMixin } from "vuelidate";
 import { required, maxLength, email } from "vuelidate/lib/validators";
 export default {
-  // ponyali kak modalnie okno
-  // ну вообще лучше бы ты использовал popover из bootsrap
-  // но я тебе покажу как можно сделать именно твоим способом
-  // потом все равно переделай на поповер
   computed: {
     checkboxErrors() {
       const errors = [];
@@ -248,7 +107,7 @@ export default {
     name: "",
     email: "",
     checkbox: false,
-    dialog: false,
+    showDialog: false,
   }),
   mounted() {},
   methods: {
@@ -259,7 +118,7 @@ export default {
         console.log("false");
         return;
       } else {
-        this.dialog = false;
+        this.showDialog = false;
         const reqbody = {
           name: this.name,
           email: this.email,
@@ -271,12 +130,9 @@ export default {
             data: reqbody,
           });
         } catch (error) {
-          console.log(error);
+          return new Error('Не удалось добавить пользователя')
         }
       }
-    },
-    showModalWindow() {
-      this.show = !this.show;
     },
 
     clear() {
@@ -284,7 +140,7 @@ export default {
       this.name = "";
       this.email = "";
       this.checkbox = false;
-      this.dialog = false;
+      this.showDialog = false;
     },
   },
 };
@@ -294,10 +150,10 @@ export default {
 .none {
   display: none !important;
 }
-.absolute{
+.absolute {
   position: absolute !important;
 }
-.absolute-add-btn {
+.add-btn-user {
   position: fixed !important;
   bottom: 3%;
   left: 18%;

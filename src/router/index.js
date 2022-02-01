@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Home from '@/views/Home.vue'
 
 Vue.use(VueRouter)
 
@@ -11,20 +11,15 @@ const routes = [
     component: Home
   },
   {
-    path: '/user/:userId?',
+    path: '/user/:userId',
     name: 'User',
-    component: () => import('../views/UserPost.vue'),
+    component: () => import('@/views/UserPost.vue'),
     children: [{
       path: 'post/:postId',
       name: "Post",
-      component: () => import('../views/Post.vue')
+      component: () => import('@/views/Post.vue')
     }]
   },
-  // {
-  //   path: '/user/:userId/post/:postId',
-  //   name: "Post",
-  //   component: () => import('../views/Post.vue')
-  // }
 ]
 
 const router = new VueRouter({

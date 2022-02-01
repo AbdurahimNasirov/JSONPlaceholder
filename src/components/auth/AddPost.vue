@@ -10,7 +10,7 @@
               v-on="on"
               fab
               color="cyan"
-              class="mx-2 absolute-add-btn-post"
+              class="mx-2 add-btn-post"
               @click.stop="dialog = true"
             >
               <v-icon dark color="white">mdi-plus</v-icon>
@@ -18,50 +18,38 @@
           </template>
           <span>Add new post</span>
         </v-tooltip>
-
         <v-dialog v-model="dialog" max-width="500">
           <v-card class="px-5 pb-1">
             <form>
               <v-text-field
                 v-model="name"
                 :error-messages="nameErrors"
-                :counter="`∞`"
                 label="Title"
                 required
-                @input="$v.name.$touch()"
-                @blur="$v.name.$touch()"
               ></v-text-field>
               <v-text-field
-                v-model="title"
+                v-model="body"
                 :error-messages="nameErrors"
-                :counter="`∞`"
                 label="Description"
                 required
-                @input="$v.name.$touch()"
-                @blur="$v.name.$touch()"
               ></v-text-field>
-
               <v-select
                 v-model="select"
                 :items="items"
                 :error-messages="selectErrors"
                 label="Item"
                 required
-                @change="$v.select.$touch()"
-                @blur="$v.select.$touch()"
               ></v-select>
               <v-checkbox
                 v-model="checkbox"
                 :error-messages="checkboxErrors"
                 label="Do you agree?"
                 required
-                @change="$v.checkbox.$touch()"
-                @blur="$v.checkbox.$touch()"
               ></v-checkbox>
             </form>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn text @click="clear"> clear </v-btn>
+              <v-btn text @click="clearAllData"> Cencel </v-btn>
               <v-btn class="mr-4 green darken-1" text @click="submit">
                 Add New Post
               </v-btn>
@@ -76,11 +64,11 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
 import { validationMixin } from "vuelidate";
-import { required, email } from "vuelidate/lib/validators";
+import { required } from "vuelidate/lib/validators";
 export default {
   validations: {
     name: { required },
-    title: { required },
+    body: { required },
     select: { required },
     checkbox: {
       checked(val) {
@@ -91,8 +79,7 @@ export default {
   mixins: [validationMixin],
   data: () => ({
     name: "",
-    title: "",
-    email: "",
+    body: "",
     select: null,
     items: [],
     checkbox: false,
@@ -143,7 +130,7 @@ export default {
         const bodyReq = {
           userId: this.userId,
           title: this.name,
-          body: this.title,
+          body: this.body,
         };
         try {
           await this.addPost({
@@ -151,11 +138,11 @@ export default {
             method: "post",
             data: bodyReq,
           });
-          this.clear();
+          this.clearAllData();
         } catch (error) {}
       }
     },
-    clear() {
+    clearAllData() {
       this.$v.$reset();
       this.name = "";
       this.title = "";
@@ -168,7 +155,7 @@ export default {
 </script>
 
 <style lang="scss">
-.absolute-add-btn-post {
+.add-btn-post {
   position: fixed !important;
   top: 90%;
   right: 3%;
