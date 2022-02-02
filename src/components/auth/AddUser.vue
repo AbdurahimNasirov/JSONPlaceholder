@@ -1,6 +1,6 @@
 <template>
   <div id="app" class="absolute">
-    <Popover :toWhere="'User'" />
+    <Popover :goTo="'User'" />
   </div>
 </template>
 
