@@ -78,7 +78,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .search-post {
   position: fixed;
   border: 2px solid rgb(77, 74, 74);

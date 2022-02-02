@@ -33,7 +33,6 @@ export default {
     examPost: ''
   }),
   async mounted() {
-    console.log('post')
     if (!this.getPosts.length)
       await this.fetchPosts({
         url: this.$http.post,
@@ -43,8 +42,6 @@ export default {
     this.post = this.getPosts.find(
       (post) => post.id === +this.$route.params.postId
     );
-    // this.post = this.post[0];
-
     if (!this.post) {
       this.$router.push({
         name: 'User',
@@ -69,7 +66,6 @@ export default {
       this.updatePost(data)
     },
     async updatePost (data){
-      // исправь это дублирование, не знаю от куда оно у тебя пришло
       if(this.examPost !== JSON.stringify(data)) {
         await this.updataPost({
           url: `${this.$http.post}/${this.$route.params.postId}`,
@@ -88,11 +84,6 @@ export default {
       }
     },
     async delPost() {
-      // что за ерунда:)
-      // ничего не понял))))
-      // udalit i route i page 
-      // нужно что бы после удаления перекидывало в роут?
-      // все?
       await this.deletePost({
         url: `${this.$http.post}/${this.$route.params.postId}`,
         method: "delete",
@@ -109,7 +100,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .post-title {
   width: 100% !important;
   font-size: 24px;

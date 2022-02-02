@@ -7,9 +7,9 @@
 </template>
 
 <script>
-import Search from "../components/app/Search.vue";
-import AddUser from "../components/auth/AddUser.vue";
-import UserItem from "../components/Useritem.vue";
+import Search from "@/components/app/Search.vue";
+import AddUser from "@/components/auth/AddUser.vue";
+import UserItem from "@/components/Users/Useritem.vue";
 import { mapGetters, mapActions } from "vuex";
 export default {
   name: "Sidebar",
@@ -42,5 +42,5 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 </style>

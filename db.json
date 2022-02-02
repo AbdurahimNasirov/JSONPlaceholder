@@ -54,6 +54,16 @@
       "name": "abdurahim",
       "email": "nasirov@gmail.com",
       "id": 11
+    },
+    {
+      "name": "Ibrohim",
+      "email": "ogayn@gmail.com",
+      "id": 12
+    },
+    {
+      "name": "noviyBro",
+      "email": "testemail@gmail.com",
+      "id": 13
     }
   ],
   "posts": [
@@ -577,6 +587,12 @@
       "title": "davay qani yana bitta",
       "body": "bos gazini xali bundan qyn narsala qlasan xudo xolasa",
       "id": 102
+    },
+    {
+      "userId": 11,
+      "title": "oxwadimikn",
+      "body": "mayli davay tavakkal",
+      "id": 103
     }
   ]
 }

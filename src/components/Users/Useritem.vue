@@ -16,7 +16,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
     .user--item:hover{
         background:rgba(0, 0, 0, 0.356);
     }
