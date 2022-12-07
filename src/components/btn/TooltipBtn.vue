@@ -33,9 +33,6 @@ export default {
       this.$emit("showDialog", this.showDialog);
     },
   },
-  mounted() {
-    console.log(this.goTo);
-  },
 };
 </script>
 

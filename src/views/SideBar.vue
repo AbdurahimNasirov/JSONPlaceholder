@@ -1,9 +1,11 @@
 <template>
-  <div>
-    <Search :users="getUsers" />
-    <UserItem v-for="user in getUsers" :key="user.id" :user="user" />
+  <v-col md="3" class="amber darken-4 pr-0 fixed">
+    <div style="overflow: auto; height: 100vh">
+      <Search :users="getUsers" />
+      <UserItem v-for="user in getUsers" :key="user.id" :user="user" />
+    </div>
     <AddUser :show="show" />
-  </div>
+  </v-col>
 </template>
 
 <script>

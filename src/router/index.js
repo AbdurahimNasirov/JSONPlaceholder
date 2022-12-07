@@ -13,13 +13,13 @@ const routes = [
   {
     path: '/user/:userId',
     name: 'User',
-    component: () => import('@/views/UserPost.vue'),
-    children: [{
-      path: 'post/:postId',
-      name: "Post",
-      component: () => import('@/views/Post.vue')
-    }]
+    component: () => import('@/views/UserPost.vue')
   },
+  {
+    path: '/user/:userId/post/:postId',
+    name: "Post",
+    component: () => import('@/views/Post.vue')
+  }
 ]
 
 const router = new VueRouter({

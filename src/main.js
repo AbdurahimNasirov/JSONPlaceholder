@@ -12,8 +12,8 @@ Vue.use(vuetify)
 Vue.config.productionTip = false
 Vue.prototype.$axios = axios
 Vue.prototype.$http = {
-  post: "http://localhost:5000/posts",
-  users: "http://localhost:5000/users"
+  post: "https://638f979d4bfe20f70ad5672b.mockapi.io/posts",
+  users: "https://638f979d4bfe20f70ad5672b.mockapi.io/post-app-users"
 }
 new Vue({
   el: '#app',

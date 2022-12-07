@@ -2,9 +2,7 @@
   <div id="app">
     <v-app id="inspire">
       <v-row>
-        <v-col md="3" class="amber darken-4 pr-0 fixed">
-          <SideBar />
-        </v-col>
+        <SideBar />
         <v-col md="9" class="space">
           <router-view />
         </v-col>
@@ -31,8 +29,13 @@ a {
 }
 .fixed {
   position: fixed;
-  min-height: 105vh !important;
+  min-height: 100vh !important;
 }
+
+.absolute {
+  position: absolute
+}
+
 .space {
   margin-left: auto;
 }

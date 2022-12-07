@@ -1,11 +1,7 @@
 <template>
   <div>
     <router-link
-      :to="{
-        name: 'Post',
-        params: { userId: $route.params.userId, postId: post.id },
-        component: () => import('@/views/Post.vue'),
-      }"
+      :to="`/user/${$route.params.userId}/post/${post.id}`"
       >{{ post.title }}</router-link
     >
     <p>{{ post.body }}</p>
